@@ -73,7 +73,9 @@ export default function Navbar() {
 
         {/* Desktop CTA */}
         <div className="hidden md:block">
-          <Button size="sm">Book Demo</Button>
+          <Link href="#contact">
+            <Button size="sm">Book Demo</Button>
+          </Link>
         </div>
 
         {/* Mobile Navigation Trigger */}
@@ -142,9 +144,11 @@ export default function Navbar() {
 
             {/* Mobile CTA */}
             <div className="border-t border-white/5 pt-6">
-              <Button className="w-full" onClick={() => setIsOpen(false)}>
-                Book Demo
-              </Button>
+              <Link href="#contact" onClick={() => setIsOpen(false)} className="w-full block">
+                <Button className="w-full">
+                  Book Demo
+                </Button>
+              </Link>
             </div>
           </SheetContent>
         </Sheet>
