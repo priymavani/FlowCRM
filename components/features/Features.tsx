@@ -93,10 +93,10 @@ export default function Features() {
         </div>
 
         {/* 2x2 Feature Cards Grid */}
-        <div className="features-grid grid grid-cols-1 md:grid-cols-2 gap-8 mb-20 lg:mb-28">
+        <div className="features-grid grid grid-cols-1 lg:grid-cols-3 gap-8 mb-20 lg:mb-28">
           
           {/* Module 1: Lead Management */}
-          <div className="feature-card-item">
+          <div className="feature-card-item lg:col-span-2">
             <FeatureCard
               title="Lead Management"
               description="Capture leads at high velocity, monitor pipeline distributions, and establish automatic checklists to convert prospects."
@@ -128,7 +128,7 @@ export default function Features() {
           </div>
 
           {/* Module 2: HRMS */}
-          <div className="feature-card-item">
+          <div className="feature-card-item lg:col-span-1">
             <FeatureCard
               title="HRMS Console"
               description="Synchronize team shifts, oversee attendance status rosters, and manage shift checklists inside a single manager terminal."
@@ -160,7 +160,7 @@ export default function Features() {
           </div>
 
           {/* Module 3: Automated Invoicing */}
-          <div className="feature-card-item">
+          <div className="feature-card-item lg:col-span-1">
             <FeatureCard
               title="Automated Invoicing"
               description="Deploy professional invoices, automate billing logs, track client payments, and generate monthly tax declarations."
@@ -188,7 +188,7 @@ export default function Features() {
           </div>
 
           {/* Module 4: Analytics & Reports */}
-          <div className="feature-card-item">
+          <div className="feature-card-item lg:col-span-2">
             <FeatureCard
               title="Analytics & Reports"
               description="Review operational cashflows, track team conversion rates, and build custom performance graphs with SVG vectors."

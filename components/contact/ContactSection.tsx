@@ -303,32 +303,42 @@ export default function ContactSection() {
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       
                       {/* Name */}
-                      <div className="flex flex-col items-start gap-1.5 w-full">
-                        <label htmlFor="name" className="text-[11px] font-semibold text-white/80 font-mono uppercase tracking-wider">Your Name</label>
+                      <div className="relative w-full group/input pt-2 flex flex-col items-start">
                         <Input
                           id="name"
                           type="text"
-                          placeholder="Aman Gupta"
-                          className="h-11 bg-[#0A0D14]/50 border-white/5 focus-visible:border-primary/50 focus-visible:ring-4 focus-visible:ring-primary/10 focus-visible:ring-offset-0 transition-all duration-300"
+                          placeholder=" "
+                          className="peer h-11 w-full bg-[#0A0D14]/50 border-white/5 focus-visible:border-primary/50 focus-visible:ring-4 focus-visible:ring-primary/10 focus-visible:ring-offset-0 transition-all duration-300 placeholder:opacity-0"
                           {...register("name")}
                           aria-invalid={!!errors.name}
                         />
+                        <label
+                          htmlFor="name"
+                          className="absolute left-3 top-[17px] text-[10px] text-muted-foreground font-mono uppercase tracking-wider transition-all duration-300 origin-[0] pointer-events-none peer-focus:text-primary peer-focus:-translate-y-6 peer-focus:scale-75 peer-[:not(:placeholder-shown)]:-translate-y-6 peer-[:not(:placeholder-shown)]:scale-75"
+                        >
+                          Your Name
+                        </label>
                         {errors.name && (
                           <span className="text-[10px] text-destructive font-medium mt-0.5">{errors.name.message}</span>
                         )}
                       </div>
 
                       {/* Company Name */}
-                      <div className="flex flex-col items-start gap-1.5 w-full">
-                        <label htmlFor="companyName" className="text-[11px] font-semibold text-white/80 font-mono uppercase tracking-wider">Company Name</label>
+                      <div className="relative w-full group/input pt-2 flex flex-col items-start">
                         <Input
                           id="companyName"
                           type="text"
-                          placeholder="Vertex Technologies"
-                          className="h-11 bg-[#0A0D14]/50 border-white/5 focus-visible:border-primary/50 focus-visible:ring-4 focus-visible:ring-primary/10 focus-visible:ring-offset-0 transition-all duration-300"
+                          placeholder=" "
+                          className="peer h-11 w-full bg-[#0A0D14]/50 border-white/5 focus-visible:border-primary/50 focus-visible:ring-4 focus-visible:ring-primary/10 focus-visible:ring-offset-0 transition-all duration-300 placeholder:opacity-0"
                           {...register("companyName")}
                           aria-invalid={!!errors.companyName}
                         />
+                        <label
+                          htmlFor="companyName"
+                          className="absolute left-3 top-[17px] text-[10px] text-muted-foreground font-mono uppercase tracking-wider transition-all duration-300 origin-[0] pointer-events-none peer-focus:text-primary peer-focus:-translate-y-6 peer-focus:scale-75 peer-[:not(:placeholder-shown)]:-translate-y-6 peer-[:not(:placeholder-shown)]:scale-75"
+                        >
+                          Company Name
+                        </label>
                         {errors.companyName && (
                           <span className="text-[10px] text-destructive font-medium mt-0.5">{errors.companyName.message}</span>
                         )}
@@ -340,32 +350,42 @@ export default function ContactSection() {
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       
                       {/* Email */}
-                      <div className="flex flex-col items-start gap-1.5 w-full">
-                        <label htmlFor="businessEmail" className="text-[11px] font-semibold text-white/80 font-mono uppercase tracking-wider">Business Email</label>
+                      <div className="relative w-full group/input pt-2 flex flex-col items-start">
                         <Input
                           id="businessEmail"
                           type="email"
-                          placeholder="aman@vertex.com"
-                          className="h-11 bg-[#0A0D14]/50 border-white/5 focus-visible:border-primary/50 focus-visible:ring-4 focus-visible:ring-primary/10 focus-visible:ring-offset-0 transition-all duration-300"
+                          placeholder=" "
+                          className="peer h-11 w-full bg-[#0A0D14]/50 border-white/5 focus-visible:border-primary/50 focus-visible:ring-4 focus-visible:ring-primary/10 focus-visible:ring-offset-0 transition-all duration-300 placeholder:opacity-0"
                           {...register("businessEmail")}
                           aria-invalid={!!errors.businessEmail}
                         />
+                        <label
+                          htmlFor="businessEmail"
+                          className="absolute left-3 top-[17px] text-[10px] text-muted-foreground font-mono uppercase tracking-wider transition-all duration-300 origin-[0] pointer-events-none peer-focus:text-primary peer-focus:-translate-y-6 peer-focus:scale-75 peer-[:not(:placeholder-shown)]:-translate-y-6 peer-[:not(:placeholder-shown)]:scale-75"
+                        >
+                          Business Email
+                        </label>
                         {errors.businessEmail && (
                           <span className="text-[10px] text-destructive font-medium mt-0.5">{errors.businessEmail.message}</span>
                         )}
                       </div>
 
                       {/* Phone */}
-                      <div className="flex flex-col items-start gap-1.5 w-full">
-                        <label htmlFor="phoneNumber" className="text-[11px] font-semibold text-white/80 font-mono uppercase tracking-wider">Phone Number</label>
+                      <div className="relative w-full group/input pt-2 flex flex-col items-start">
                         <Input
                           id="phoneNumber"
                           type="text"
-                          placeholder="+91 98765 43210"
-                          className="h-11 bg-[#0A0D14]/50 border-white/5 focus-visible:border-primary/50 focus-visible:ring-4 focus-visible:ring-primary/10 focus-visible:ring-offset-0 transition-all duration-300"
+                          placeholder=" "
+                          className="peer h-11 w-full bg-[#0A0D14]/50 border-white/5 focus-visible:border-primary/50 focus-visible:ring-4 focus-visible:ring-primary/10 focus-visible:ring-offset-0 transition-all duration-300 placeholder:opacity-0"
                           {...register("phoneNumber")}
                           aria-invalid={!!errors.phoneNumber}
                         />
+                        <label
+                          htmlFor="phoneNumber"
+                          className="absolute left-3 top-[17px] text-[10px] text-muted-foreground font-mono uppercase tracking-wider transition-all duration-300 origin-[0] pointer-events-none peer-focus:text-primary peer-focus:-translate-y-6 peer-focus:scale-75 peer-[:not(:placeholder-shown)]:-translate-y-6 peer-[:not(:placeholder-shown)]:scale-75"
+                        >
+                          Phone Number
+                        </label>
                         {errors.phoneNumber && (
                           <span className="text-[10px] text-destructive font-medium mt-0.5">{errors.phoneNumber.message}</span>
                         )}
