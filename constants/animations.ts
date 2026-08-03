@@ -2,6 +2,11 @@
  * Animation design tokens from DESIGN.md and PROJECT.md
  */
 
+// Easing cubic-bezier tuples typed for Framer Motion
+const EASE_SMOOTH = [0.25, 1, 0.5, 1] as [number, number, number, number];
+const EASE_OUT_EXPO = [0.16, 1, 0.3, 1] as [number, number, number, number];
+const EASE_IN_EXPO = [0.7, 0, 0.84, 0] as [number, number, number, number];
+
 // GSAP Standard Section Scroll Reveal Settings
 export const SCROLL_REVEAL_DEFAULTS = {
   y: 40,
@@ -14,7 +19,7 @@ export const SCROLL_REVEAL_DEFAULTS = {
 // Framer Motion Transition Presets
 export const TRANSITIONS = {
   default: { type: "spring", stiffness: 300, damping: 30 },
-  smooth: { ease: [0.25, 1, 0.5, 1], duration: 0.8 }, // power3.out equivalent
+  smooth: { ease: EASE_SMOOTH, duration: 0.8 }, // power3.out equivalent
   hover: { type: "spring", stiffness: 400, damping: 25 },
 };
 
@@ -78,14 +83,14 @@ export const ANIMATION_VARIANTS = {
     visible: {
       x: 0,
       transition: {
-        ease: [0.16, 1, 0.3, 1], // easeOutExpo
+        ease: EASE_OUT_EXPO,
         duration: 0.6,
       },
     },
     exit: {
       x: "100%",
       transition: {
-        ease: [0.7, 0, 0.84, 0], // easeInExpo
+        ease: EASE_IN_EXPO,
         duration: 0.4,
       },
     },
