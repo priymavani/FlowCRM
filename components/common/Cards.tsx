@@ -119,26 +119,37 @@ interface BenefitCardProps extends React.HTMLAttributes<HTMLDivElement> {
   title: string;
   description: string;
   icon?: React.ReactNode;
+  children?: React.ReactNode;
 }
 
-export function BenefitCard({ title, description, icon, className, ...props }: BenefitCardProps) {
+export function BenefitCard({
+  title,
+  description,
+  icon,
+  children,
+  className,
+  ...props
+}: BenefitCardProps) {
   return (
     <div
       className={cn(
-        "bg-card border border-white/5 rounded-card p-7 shadow-premium flex gap-5 hover:scale-[1.03] transition-transform duration-300 ease-out group",
+        "bg-card border border-white/5 rounded-card p-7 shadow-premium flex flex-col gap-5 hover:scale-[1.02] transition-transform duration-300 ease-out group",
         className
       )}
       {...props}
     >
-      {icon && (
-        <div className="p-3 bg-surface rounded-button shrink-0 h-fit text-primary border border-white/5 group-hover:rotate-6 transition-transform duration-300">
-          {icon}
+      <div className="flex gap-4 items-start">
+        {icon && (
+          <div className="p-3 bg-surface rounded-button shrink-0 h-fit text-primary border border-white/5 group-hover:rotate-6 transition-transform duration-300 animate-hover-icon">
+            {icon}
+          </div>
+        )}
+        <div className="flex flex-col gap-1.5">
+          <h3 className="text-lg font-semibold text-heading">{title}</h3>
+          <p className="text-body-premium text-sm/relaxed text-muted-foreground">{description}</p>
         </div>
-      )}
-      <div className="flex flex-col gap-2">
-        <h3 className="text-lg font-semibold text-heading">{title}</h3>
-        <p className="text-body-premium text-sm/relaxed">{description}</p>
       </div>
+      {children && <div className="mt-auto w-full">{children}</div>}
     </div>
   );
 }

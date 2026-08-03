@@ -3,13 +3,13 @@ import { Container } from "@/components/common/Container";
 import { SectionHeader } from "@/components/common/SectionHeader";
 import Hero from "@/components/hero/Hero";
 import Features from "@/components/features/Features";
+import Benefits from "@/components/benefits/Benefits";
 import { GradientBlob } from "@/components/common/Decorators";
 
 export default function Home() {
   return (
     <>
       <Hero />
-
       <Features />
 
       {/* Integrations Section Placeholder */}
@@ -26,19 +26,7 @@ export default function Home() {
         </Container>
       </Section>
 
-      {/* Benefits (Why Us) Section Placeholder */}
-      <Section id="benefits">
-        <Container>
-          <SectionHeader
-            label="Why FlowCRM"
-            title="The choice for high-velocity teams"
-            description="Speed, automation, security, and scalability come standard out of the box."
-          />
-          <div className="py-20 border border-dashed border-white/10 rounded-dashboard w-full flex items-center justify-center bg-card/50">
-            <span className="text-sm font-mono text-muted-foreground">[Why Choose Us Grid Placeholder]</span>
-          </div>
-        </Container>
-      </Section>
+      <Benefits />
 
       {/* Testimonials Section Placeholder */}
       <Section id="testimonials" variant="surface">
