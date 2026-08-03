@@ -83,7 +83,7 @@ export function FeatureCard({
   return (
     <div
       className={cn(
-        "bg-card border border-white/5 rounded-card p-7 shadow-premium flex flex-col gap-6 hover:scale-[1.02] transition-transform duration-300 ease-out group",
+        "bg-card border border-white/5 rounded-card p-7 shadow-premium flex flex-col gap-6 hover:scale-[1.01] hover:-translate-y-1 hover:border-primary/25 hover:shadow-[0_0_30px_rgba(255,138,29,0.04)] transition-all duration-300 ease-out group",
         className
       )}
       {...props}
@@ -134,7 +134,7 @@ export function BenefitCard({
   return (
     <div
       className={cn(
-        "bg-card border border-white/5 rounded-card p-7 shadow-premium flex flex-col gap-5 hover:scale-[1.02] transition-transform duration-300 ease-out group",
+        "bg-card border border-white/5 rounded-card p-7 shadow-premium flex flex-col gap-5 hover:scale-[1.01] hover:-translate-y-1 hover:border-primary/25 hover:shadow-[0_0_30px_rgba(255,138,29,0.04)] transition-all duration-300 ease-out group",
         className
       )}
       {...props}
@@ -178,7 +178,7 @@ export function IntegrationCard({
   return (
     <div
       className={cn(
-        "bg-card border border-white/5 rounded-card p-6 shadow-premium flex flex-col gap-4 hover:scale-[1.02] hover:border-primary/20 transition-all duration-300 ease-out group relative overflow-hidden",
+        "bg-card border border-white/5 rounded-card p-6 shadow-premium flex flex-col gap-4 hover:scale-[1.01] hover:-translate-y-1 hover:border-primary/25 hover:shadow-[0_0_30px_rgba(255,138,29,0.05)] transition-all duration-300 ease-out group relative overflow-hidden",
         className
       )}
       {...props}
@@ -235,7 +235,7 @@ export function TestimonialCard({
   return (
     <div
       className={cn(
-        "bg-card border border-white/5 rounded-card p-7 shadow-premium flex flex-col gap-5 justify-between hover:scale-[1.02] transition-transform duration-300 ease-out",
+        "bg-card border border-white/5 rounded-card p-7 shadow-premium flex flex-col gap-5 justify-between hover:scale-[1.01] hover:-translate-y-1 hover:border-primary/25 hover:shadow-[0_0_30px_rgba(255,138,29,0.04)] transition-all duration-300 ease-out group",
         className
       )}
       {...props}

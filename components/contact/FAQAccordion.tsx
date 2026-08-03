@@ -16,22 +16,38 @@ export default function FAQAccordion() {
   useEffect(() => {
     if (!faqRef.current) return;
 
-    const ctx = gsap.context(() => {
+    const mm = gsap.matchMedia();
+
+    mm.add({
+      isDesktop: "(min-width: 1024px)",
+      isMobile: "(max-width: 1023px)",
+      reduceMotion: "(prefers-reduced-motion: reduce)"
+    }, (context) => {
+      const { reduceMotion, isMobile } = context.conditions as { reduceMotion: boolean; isMobile: boolean };
+
+      if (reduceMotion) {
+        gsap.set(".faq-reveal", {
+          opacity: 1,
+          y: 0
+        });
+        return;
+      }
+
       // Reveal the FAQ header and accordion items sequentially
       gsap.from(".faq-reveal", {
         scrollTrigger: {
-          trigger: ".faq-container-trigger",
+          trigger: faqRef.current,
           start: "top 85%",
         },
-        y: 30,
+        y: isMobile ? 15 : 30,
         opacity: 0,
-        stagger: 0.08,
+        stagger: isMobile ? 0.05 : 0.08,
         duration: 0.7,
         ease: "power2.out",
       });
     }, faqRef);
 
-    return () => ctx.revert();
+    return () => mm.revert();
   }, []);
 
   const faqs = [

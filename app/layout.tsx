@@ -18,7 +18,25 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "FlowCRM | The 360° Business Management Platform",
-  description: "Manage leads, HRMS, invoicing, and analytics seamlessly in FlowCRM. The premium SaaS workspace built for modern organizations.",
+  description: "Unified operations workspace built for modern businesses to manage leads, track workforce attendance shifts, and automate invoices.",
+  metadataBase: new URL("https://flow-crm.vercel.app"),
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: "FlowCRM | The 360° Business Management Platform",
+    description: "Unified operations workspace built for modern businesses to manage leads, track workforce attendance shifts, and automate invoices.",
+    url: "https://flow-crm.vercel.app",
+    siteName: "FlowCRM",
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "FlowCRM | The 360° Business Management Platform",
+    description: "Unified operations workspace built for modern businesses to manage leads, track workforce attendance shifts, and automate invoices.",
+    creator: "@flowcrm",
+  },
   icons: {
     icon: "/favicon.ico",
   },

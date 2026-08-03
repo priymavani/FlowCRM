@@ -17,17 +17,36 @@ export default function Features() {
   useEffect(() => {
     if (!sectionRef.current) return;
 
-    const ctx = gsap.context(() => {
+    const mm = gsap.matchMedia();
+
+    mm.add({
+      isDesktop: "(min-width: 1024px)",
+      isMobile: "(max-width: 1023px)",
+      reduceMotion: "(prefers-reduced-motion: reduce)"
+    }, (context) => {
+      const { reduceMotion, isMobile } = context.conditions as { reduceMotion: boolean; isMobile: boolean };
+
+      if (reduceMotion) {
+        gsap.set(".feature-card-item, .features-showcase-wrapper", {
+          opacity: 1,
+          y: 0
+        });
+        return;
+      }
+
+      const cardY = isMobile ? 25 : 50;
+      const showcaseY = isMobile ? 30 : 60;
+
       // 1. Stagger animate the 4 feature cards
       gsap.from(".feature-card-item", {
         scrollTrigger: {
           trigger: ".features-grid",
-          start: "top 80%",
+          start: "top 85%",
         },
-        y: 50,
+        y: cardY,
         opacity: 0,
-        stagger: 0.15,
-        duration: 0.8,
+        stagger: isMobile ? 0.08 : 0.15,
+        duration: 0.7,
         ease: "power3.out",
       });
 
@@ -37,14 +56,14 @@ export default function Features() {
           trigger: ".features-showcase-wrapper",
           start: "top 85%",
         },
-        y: 60,
+        y: showcaseY,
         opacity: 0,
-        duration: 1,
+        duration: 0.8,
         ease: "power3.out",
       });
     }, sectionRef);
 
-    return () => ctx.revert();
+    return () => mm.revert();
   }, []);
 
   return (

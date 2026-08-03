@@ -87,17 +87,35 @@ export default function ContactSection() {
   useEffect(() => {
     if (!sectionRef.current) return;
 
-    const ctx = gsap.context(() => {
+    const mm = gsap.matchMedia();
+
+    mm.add({
+      isDesktop: "(min-width: 1024px)",
+      isMobile: "(max-width: 1023px)",
+      reduceMotion: "(prefers-reduced-motion: reduce)"
+    }, (context) => {
+      const { reduceMotion, isMobile } = context.conditions as { reduceMotion: boolean; isMobile: boolean };
+
+      if (reduceMotion) {
+        gsap.set(".contact-info-reveal, .contact-form-reveal", {
+          opacity: 1,
+          x: 0
+        });
+        return;
+      }
+
+      const xOffset = isMobile ? 15 : 40;
+
       // 1. Reveal Info Panel content on scroll
       gsap.from(".contact-info-reveal", {
         scrollTrigger: {
           trigger: ".contact-grid-trigger",
-          start: "top 80%",
+          start: "top 85%",
         },
-        x: -40,
+        x: -xOffset,
         opacity: 0,
-        stagger: 0.1,
-        duration: 0.8,
+        stagger: isMobile ? 0.06 : 0.1,
+        duration: 0.7,
         ease: "power2.out",
       });
 
@@ -105,16 +123,16 @@ export default function ContactSection() {
       gsap.from(".contact-form-reveal", {
         scrollTrigger: {
           trigger: ".contact-grid-trigger",
-          start: "top 80%",
+          start: "top 85%",
         },
-        x: 40,
+        x: xOffset,
         opacity: 0,
-        duration: 0.8,
+        duration: 0.7,
         ease: "power2.out",
       });
     }, sectionRef);
 
-    return () => ctx.revert();
+    return () => mm.revert();
   }, []);
 
   const onSubmit = async (data: ContactFormValues) => {
@@ -291,7 +309,7 @@ export default function ContactSection() {
                           id="name"
                           type="text"
                           placeholder="Aman Gupta"
-                          className="h-11 bg-[#0A0D14]/50 border-white/5 focus-visible:border-primary/50 focus-visible:ring-primary/10 focus-visible:ring-2"
+                          className="h-11 bg-[#0A0D14]/50 border-white/5 focus-visible:border-primary/50 focus-visible:ring-4 focus-visible:ring-primary/10 focus-visible:ring-offset-0 transition-all duration-300"
                           {...register("name")}
                           aria-invalid={!!errors.name}
                         />
@@ -307,7 +325,7 @@ export default function ContactSection() {
                           id="companyName"
                           type="text"
                           placeholder="Vertex Technologies"
-                          className="h-11 bg-[#0A0D14]/50 border-white/5 focus-visible:border-primary/50 focus-visible:ring-primary/10 focus-visible:ring-2"
+                          className="h-11 bg-[#0A0D14]/50 border-white/5 focus-visible:border-primary/50 focus-visible:ring-4 focus-visible:ring-primary/10 focus-visible:ring-offset-0 transition-all duration-300"
                           {...register("companyName")}
                           aria-invalid={!!errors.companyName}
                         />
@@ -328,7 +346,7 @@ export default function ContactSection() {
                           id="businessEmail"
                           type="email"
                           placeholder="aman@vertex.com"
-                          className="h-11 bg-[#0A0D14]/50 border-white/5 focus-visible:border-primary/50 focus-visible:ring-primary/10 focus-visible:ring-2"
+                          className="h-11 bg-[#0A0D14]/50 border-white/5 focus-visible:border-primary/50 focus-visible:ring-4 focus-visible:ring-primary/10 focus-visible:ring-offset-0 transition-all duration-300"
                           {...register("businessEmail")}
                           aria-invalid={!!errors.businessEmail}
                         />
@@ -344,7 +362,7 @@ export default function ContactSection() {
                           id="phoneNumber"
                           type="text"
                           placeholder="+91 98765 43210"
-                          className="h-11 bg-[#0A0D14]/50 border-white/5 focus-visible:border-primary/50 focus-visible:ring-primary/10 focus-visible:ring-2"
+                          className="h-11 bg-[#0A0D14]/50 border-white/5 focus-visible:border-primary/50 focus-visible:ring-4 focus-visible:ring-primary/10 focus-visible:ring-offset-0 transition-all duration-300"
                           {...register("phoneNumber")}
                           aria-invalid={!!errors.phoneNumber}
                         />
@@ -363,7 +381,7 @@ export default function ContactSection() {
                         <label htmlFor="companySize" className="text-[11px] font-semibold text-white/80 font-mono uppercase tracking-wider">Company Size</label>
                         <select
                           id="companySize"
-                          className="h-11 w-full min-w-0 rounded-lg border border-white/5 bg-[#0A0D14]/50 px-3 py-1 text-xs text-white transition-colors outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/50 appearance-none cursor-pointer"
+                          className="h-11 w-full min-w-0 rounded-lg border border-white/5 bg-[#0A0D14]/50 px-3 py-1 text-xs text-white transition-all duration-300 outline-none focus:border-primary/50 focus:ring-4 focus:ring-primary/10 appearance-none cursor-pointer"
                           {...register("companySize")}
                           aria-invalid={!!errors.companySize}
                         >
@@ -383,7 +401,7 @@ export default function ContactSection() {
                         <label htmlFor="crmUsage" className="text-[11px] font-semibold text-white/80 font-mono uppercase tracking-wider">Primary CRM Goal</label>
                         <select
                           id="crmUsage"
-                          className="h-11 w-full min-w-0 rounded-lg border border-white/5 bg-[#0A0D14]/50 px-3 py-1 text-xs text-white transition-colors outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/50 appearance-none cursor-pointer"
+                          className="h-11 w-full min-w-0 rounded-lg border border-white/5 bg-[#0A0D14]/50 px-3 py-1 text-xs text-white transition-all duration-300 outline-none focus:border-primary/50 focus:ring-4 focus:ring-primary/10 appearance-none cursor-pointer"
                           {...register("crmUsage")}
                           aria-invalid={!!errors.crmUsage}
                         >
@@ -412,7 +430,7 @@ export default function ContactSection() {
                         <input
                           id="preferredDate"
                           type="date"
-                          className="h-11 w-full min-w-0 rounded-lg border border-white/5 bg-[#0A0D14]/50 px-3.5 py-1 text-xs text-white transition-colors outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/50 cursor-pointer"
+                          className="h-11 w-full min-w-0 rounded-lg border border-white/5 bg-[#0A0D14]/50 px-3.5 py-1 text-xs text-white transition-all duration-300 outline-none focus:border-primary/50 focus:ring-4 focus:ring-primary/10 cursor-pointer"
                           {...register("preferredDate")}
                         />
                       </div>
@@ -424,7 +442,7 @@ export default function ContactSection() {
                         </label>
                         <select
                           id="preferredTime"
-                          className="h-11 w-full min-w-0 rounded-lg border border-white/5 bg-[#0A0D14]/50 px-3 py-1 text-xs text-white transition-colors outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/50 appearance-none cursor-pointer"
+                          className="h-11 w-full min-w-0 rounded-lg border border-white/5 bg-[#0A0D14]/50 px-3 py-1 text-xs text-white transition-all duration-300 outline-none focus:border-primary/50 focus:ring-4 focus:ring-primary/10 appearance-none cursor-pointer"
                           {...register("preferredTime")}
                         >
                           <option value="" className="bg-[#1A2030] text-muted-foreground">Select window...</option>
@@ -442,7 +460,7 @@ export default function ContactSection() {
                       <Textarea
                         id="message"
                         placeholder="Please detail your current system integrations and volume expectations..."
-                        className="min-h-20 bg-[#0A0D14]/50 border-white/5 focus-visible:border-primary/50 focus-visible:ring-primary/10 focus-visible:ring-2"
+                        className="min-h-20 bg-[#0A0D14]/50 border-white/5 focus-visible:border-primary/50 focus-visible:ring-4 focus-visible:ring-primary/10 focus-visible:ring-offset-0 transition-all duration-300"
                         {...register("message")}
                         aria-invalid={!!errors.message}
                       />

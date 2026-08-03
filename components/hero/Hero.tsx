@@ -18,10 +18,32 @@ export default function Hero() {
   useEffect(() => {
     if (!containerRef.current) return;
 
-    const ctx = gsap.context(() => {
+    const mm = gsap.matchMedia();
+
+    mm.add({
+      isDesktop: "(min-width: 1024px)",
+      isMobile: "(max-width: 1023px)",
+      reduceMotion: "(prefers-reduced-motion: reduce)"
+    }, (context) => {
+      const { reduceMotion, isMobile } = context.conditions as { reduceMotion: boolean; isMobile: boolean };
+
+      if (reduceMotion) {
+        // Accessibility override: instantly display layout static
+        gsap.set(".hero-badge, .hero-headline-line, .hero-description, .hero-cta-button, .hero-trust-item, .hero-dashboard-wrapper, .hero-floating-widget", {
+          opacity: 1,
+          y: 0,
+          x: 0,
+          scale: 1
+        });
+        return;
+      }
+
+      const yOffset = isMobile ? 30 : 80;
+      const xOffset = isMobile ? 20 : 80;
+
       // 0. Badge scale-pop entrance
       gsap.from(".hero-badge", {
-        scale: 0.85,
+        scale: 0.95,
         opacity: 0,
         duration: 0.5,
         ease: "back.out(1.5)",
@@ -29,71 +51,71 @@ export default function Hero() {
 
       // 1. Text reveal timeline (Headline lines)
       gsap.from(".hero-headline-line", {
-        y: 80,
+        y: yOffset,
         opacity: 0,
-        stagger: 0.15,
-        duration: 1,
+        stagger: 0.1,
+        duration: 0.9,
         ease: "power4.out",
-        delay: 0.1,
+        delay: 0.05,
       });
 
       // 2. Paragraph description fade up
       gsap.from(".hero-description", {
-        y: 30,
+        y: isMobile ? 15 : 30,
         opacity: 0,
-        duration: 0.8,
-        delay: 0.45,
+        duration: 0.7,
+        delay: 0.35,
         ease: "power3.out",
       });
 
       // 3. CTA buttons scale/pop
       gsap.from(".hero-cta-button", {
-        scale: 0.9,
+        scale: 0.95,
         opacity: 0,
-        stagger: 0.1,
-        duration: 0.6,
-        delay: 0.75,
-        ease: "back.out(1.7)",
+        stagger: 0.08,
+        duration: 0.5,
+        delay: 0.6,
+        ease: "back.out(1.5)",
       });
 
       // 4. Trust list items fade up
       gsap.from(".hero-trust-item", {
-        y: 15,
+        y: 10,
         opacity: 0,
-        stagger: 0.08,
-        duration: 0.5,
-        delay: 0.95,
+        stagger: 0.06,
+        duration: 0.4,
+        delay: 0.8,
         ease: "power2.out",
       });
 
       // 5. Dashboard container slide-in
       gsap.from(".hero-dashboard-wrapper", {
-        x: 80,
+        x: xOffset,
         opacity: 0,
-        duration: 1.2,
-        delay: 0.35,
+        duration: 1.0,
+        delay: 0.3,
         ease: "power3.out",
       });
 
       // 6. Floating notification widgets scale-in
       gsap.from(".hero-floating-widget", {
-        scale: 0.8,
+        scale: 0.9,
         opacity: 0,
-        stagger: 0.12,
-        duration: 0.7,
-        delay: 1.2,
-        ease: "back.out(1.5)",
+        stagger: 0.1,
+        duration: 0.6,
+        delay: 1.0,
+        ease: "back.out(1.3)",
         onComplete: () => {
           // Initialize looping float animation after entrance completes
           const widgets = gsap.utils.toArray<HTMLElement>(".hero-floating-widget");
           widgets.forEach((widget, index) => {
             gsap.to(widget, {
-              y: index % 2 === 0 ? "-=12px" : "+=12px",
-              duration: 3 + index * 0.5,
+              y: index % 2 === 0 ? "-=8px" : "+=8px",
+              duration: 4 + index * 0.6,
               repeat: -1,
               yoyo: true,
               ease: "sine.inOut",
-              delay: index * 0.15,
+              delay: index * 0.1,
             });
           });
         }
@@ -102,9 +124,9 @@ export default function Hero() {
       // 7. Background pulsing glow
       if (pulseRef.current) {
         gsap.to(pulseRef.current, {
-          scale: 1.08,
-          opacity: 0.09,
-          duration: 6,
+          scale: 1.05,
+          opacity: 0.08,
+          duration: 5,
           repeat: -1,
           yoyo: true,
           ease: "sine.inOut",
@@ -112,7 +134,7 @@ export default function Hero() {
       }
     }, containerRef);
 
-    return () => ctx.revert();
+    return () => mm.revert();
   }, []);
 
   return (

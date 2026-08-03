@@ -27,22 +27,40 @@ export default function Footer() {
   useEffect(() => {
     if (!footerRef.current) return;
 
-    const ctx = gsap.context(() => {
+    const mm = gsap.matchMedia();
+
+    mm.add({
+      isDesktop: "(min-width: 1024px)",
+      isMobile: "(max-width: 1023px)",
+      reduceMotion: "(prefers-reduced-motion: reduce)"
+    }, (context) => {
+      const { reduceMotion, isMobile } = context.conditions as { reduceMotion: boolean; isMobile: boolean };
+
+      if (reduceMotion) {
+        gsap.set(".footer-col-reveal", {
+          opacity: 1,
+          y: 0
+        });
+        return;
+      }
+
+      const colY = isMobile ? 10 : 20;
+
       // Stagger reveal footer columns on viewport entry
       gsap.from(".footer-col-reveal", {
         scrollTrigger: {
-          trigger: ".footer-container-trigger",
+          trigger: footerRef.current,
           start: "top 95%",
         },
-        y: 20,
+        y: colY,
         opacity: 0,
-        stagger: 0.06,
-        duration: 0.6,
+        stagger: isMobile ? 0.04 : 0.06,
+        duration: 0.5,
         ease: "power2.out",
       });
     }, footerRef);
 
-    return () => ctx.revert();
+    return () => mm.revert();
   }, []);
 
   const handleSubscribe = async (e: React.FormEvent) => {
@@ -313,7 +331,7 @@ export default function Footer() {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         disabled={isLoading}
-                        className="h-9 pr-9 bg-[#0A0D14]/80 border-white/5 text-xs text-white focus-visible:ring-primary/20 placeholder:text-muted-foreground"
+                        className="h-9 pr-9 bg-[#0A0D14]/80 border-white/5 text-xs text-white focus-visible:border-primary/50 focus-visible:ring-4 focus-visible:ring-primary/10 focus-visible:ring-offset-0 placeholder:text-muted-foreground transition-all duration-300"
                       />
                       <button
                         type="submit"

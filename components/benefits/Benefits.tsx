@@ -29,17 +29,38 @@ export default function Benefits() {
   useEffect(() => {
     if (!sectionRef.current) return;
 
-    const ctx = gsap.context(() => {
+    const mm = gsap.matchMedia();
+
+    mm.add({
+      isDesktop: "(min-width: 1024px)",
+      isMobile: "(max-width: 1023px)",
+      reduceMotion: "(prefers-reduced-motion: reduce)"
+    }, (context) => {
+      const { reduceMotion, isMobile } = context.conditions as { reduceMotion: boolean; isMobile: boolean };
+
+      if (reduceMotion) {
+        gsap.set(".benefit-card-item, .stats-grid-trigger, .security-panel-trigger, .workflow-step-node", {
+          opacity: 1,
+          y: 0,
+          scale: 1
+        });
+        setStartCount(true);
+        return;
+      }
+
+      const cardY = isMobile ? 20 : 40;
+      const statsY = isMobile ? 15 : 30;
+
       // 1. Stagger animate benefits cards
       gsap.from(".benefit-card-item", {
         scrollTrigger: {
           trigger: ".benefits-grid-trigger",
-          start: "top 80%",
+          start: "top 85%",
         },
-        y: 40,
+        y: cardY,
         opacity: 0,
-        stagger: 0.1,
-        duration: 0.7,
+        stagger: isMobile ? 0.06 : 0.1,
+        duration: 0.6,
         ease: "power2.out",
       });
 
@@ -50,9 +71,9 @@ export default function Benefits() {
           start: "top 85%",
           onEnter: () => setStartCount(true),
         },
-        y: 30,
+        y: statsY,
         opacity: 0,
-        duration: 0.8,
+        duration: 0.7,
         ease: "power2.out",
       });
 
@@ -62,9 +83,9 @@ export default function Benefits() {
           trigger: ".security-panel-trigger",
           start: "top 85%",
         },
-        y: 40,
+        y: cardY,
         opacity: 0,
-        duration: 0.8,
+        duration: 0.7,
         ease: "power2.out",
       });
 
@@ -74,15 +95,15 @@ export default function Benefits() {
           trigger: ".workflow-container-trigger",
           start: "top 85%",
         },
-        scale: 0.9,
+        scale: 0.95,
         opacity: 0,
-        stagger: 0.08,
-        duration: 0.6,
-        ease: "back.out(1.5)",
+        stagger: isMobile ? 0.05 : 0.08,
+        duration: 0.5,
+        ease: "back.out(1.2)",
       });
     }, sectionRef);
 
-    return () => ctx.revert();
+    return () => mm.revert();
   }, []);
 
   const stats = [

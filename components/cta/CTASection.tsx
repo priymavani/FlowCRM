@@ -23,35 +23,54 @@ export default function CTASection() {
   useEffect(() => {
     if (!sectionRef.current) return;
 
-    const ctx = gsap.context(() => {
+    const mm = gsap.matchMedia();
+
+    mm.add({
+      isDesktop: "(min-width: 1024px)",
+      isMobile: "(max-width: 1023px)",
+      reduceMotion: "(prefers-reduced-motion: reduce)"
+    }, (context) => {
+      const { reduceMotion, isMobile } = context.conditions as { reduceMotion: boolean; isMobile: boolean };
+
+      if (reduceMotion) {
+        gsap.set(".cta-content-reveal, .cta-widget-reveal", {
+          opacity: 1,
+          y: 0,
+          scale: 1
+        });
+        return;
+      }
+
+      const contentY = isMobile ? 20 : 40;
+
       // Reveal the CTA Banner content on scroll
       gsap.from(".cta-content-reveal", {
         scrollTrigger: {
-          trigger: ".cta-container-trigger",
-          start: "top 80%",
+          trigger: sectionRef.current,
+          start: "top 85%",
         },
-        y: 40,
+        y: contentY,
         opacity: 0,
-        stagger: 0.1,
-        duration: 0.8,
+        stagger: isMobile ? 0.06 : 0.1,
+        duration: 0.7,
         ease: "power2.out",
       });
 
       // Reveal the mockup widget layout
       gsap.from(".cta-widget-reveal", {
         scrollTrigger: {
-          trigger: ".cta-container-trigger",
-          start: "top 80%",
+          trigger: sectionRef.current,
+          start: "top 85%",
         },
-        scale: 0.95,
+        scale: 0.96,
         opacity: 0,
-        duration: 0.9,
+        duration: 0.8,
         ease: "power2.out",
-        delay: 0.2,
+        delay: isMobile ? 0.1 : 0.2,
       });
     }, sectionRef);
 
-    return () => ctx.revert();
+    return () => mm.revert();
   }, []);
 
   return (

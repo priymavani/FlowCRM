@@ -24,16 +24,37 @@ export default function Testimonials() {
   useEffect(() => {
     if (!sectionRef.current) return;
 
-    const ctx = gsap.context(() => {
+    const mm = gsap.matchMedia();
+
+    mm.add({
+      isDesktop: "(min-width: 1024px)",
+      isMobile: "(max-width: 1023px)",
+      reduceMotion: "(prefers-reduced-motion: reduce)"
+    }, (context) => {
+      const { reduceMotion, isMobile } = context.conditions as { reduceMotion: boolean; isMobile: boolean };
+
+      if (reduceMotion) {
+        gsap.set(".featured-story-trigger, .testimonial-grid-item, .success-metrics-trigger, .client-logo-item", {
+          opacity: 1,
+          y: 0
+        });
+        setStartCount(true);
+        return;
+      }
+
+      const featuredY = isMobile ? 20 : 40;
+      const gridY = isMobile ? 15 : 35;
+      const statsY = isMobile ? 15 : 30;
+
       // 1. Reveal Featured Story
       gsap.from(".featured-story-trigger", {
         scrollTrigger: {
           trigger: ".featured-story-trigger",
-          start: "top 80%",
+          start: "top 85%",
         },
-        y: 40,
+        y: featuredY,
         opacity: 0,
-        duration: 0.8,
+        duration: 0.7,
         ease: "power2.out",
       });
 
@@ -41,12 +62,12 @@ export default function Testimonials() {
       gsap.from(".testimonial-grid-item", {
         scrollTrigger: {
           trigger: ".testimonials-grid-trigger",
-          start: "top 80%",
+          start: "top 85%",
         },
-        y: 35,
+        y: gridY,
         opacity: 0,
-        stagger: 0.08,
-        duration: 0.6,
+        stagger: isMobile ? 0.05 : 0.08,
+        duration: 0.5,
         ease: "power2.out",
       });
 
@@ -57,9 +78,9 @@ export default function Testimonials() {
           start: "top 85%",
           onEnter: () => setStartCount(true),
         },
-        y: 30,
+        y: statsY,
         opacity: 0,
-        duration: 0.8,
+        duration: 0.7,
         ease: "power2.out",
       });
 
@@ -67,17 +88,17 @@ export default function Testimonials() {
       gsap.from(".client-logo-item", {
         scrollTrigger: {
           trigger: ".client-logos-trigger",
-          start: "top 90%",
+          start: "top 95%",
         },
-        y: 15,
+        y: isMobile ? 8 : 15,
         opacity: 0,
-        stagger: 0.06,
-        duration: 0.5,
+        stagger: isMobile ? 0.04 : 0.06,
+        duration: 0.4,
         ease: "power2.out",
       });
     }, sectionRef);
 
-    return () => ctx.revert();
+    return () => mm.revert();
   }, []);
 
   const [isPlaying, setIsPlaying] = useState(true);
