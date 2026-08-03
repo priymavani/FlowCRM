@@ -191,20 +191,41 @@ interface TestimonialCardProps extends React.HTMLAttributes<HTMLDivElement> {
   company: string;
   review: string;
   avatarSrc?: string;
+  designation?: string;
+  rating?: number;
 }
 
-export function TestimonialCard({ name, company, review, avatarSrc, className, ...props }: TestimonialCardProps) {
+export function TestimonialCard({
+  name,
+  company,
+  review,
+  avatarSrc,
+  designation,
+  rating = 5,
+  className,
+  ...props
+}: TestimonialCardProps) {
   return (
     <div
       className={cn(
-        "bg-card border border-white/5 rounded-card p-7 shadow-premium flex flex-col gap-5 justify-between hover:scale-[1.03] transition-transform duration-300 ease-out",
+        "bg-card border border-white/5 rounded-card p-7 shadow-premium flex flex-col gap-5 justify-between hover:scale-[1.02] transition-transform duration-300 ease-out",
         className
       )}
       {...props}
     >
-      <p className="text-body-premium italic text-sm/relaxed">&ldquo;{review}&rdquo;</p>
+      <div className="flex flex-col gap-4">
+        {rating > 0 && (
+          <div className="flex gap-1 text-[#FFC857]" aria-label={`${rating} out of 5 stars`}>
+            {Array.from({ length: rating }).map((_, i) => (
+              <span key={i} className="text-sm">★</span>
+            ))}
+          </div>
+        )}
+        <p className="text-body-premium italic text-sm/relaxed">&ldquo;{review}&rdquo;</p>
+      </div>
+
       <div className="flex items-center gap-4 border-t border-white/5 pt-4">
-        <div className="size-10 rounded-full bg-surface border border-white/5 flex items-center justify-center overflow-hidden font-bold text-sm text-primary relative">
+        <div className="size-10 rounded-full bg-surface border border-white/5 flex items-center justify-center overflow-hidden font-bold text-sm text-primary relative shrink-0">
           {avatarSrc ? (
             <Image
               src={avatarSrc}
@@ -219,7 +240,9 @@ export function TestimonialCard({ name, company, review, avatarSrc, className, .
         </div>
         <div className="flex flex-col">
           <cite className="not-italic text-sm font-semibold text-heading">{name}</cite>
-          <span className="text-xs text-muted-foreground">{company}</span>
+          <span className="text-xs text-muted-foreground leading-normal">
+            {designation ? `${designation}, ` : ""}{company}
+          </span>
         </div>
       </div>
     </div>

@@ -4,6 +4,7 @@ import { SectionHeader } from "@/components/common/SectionHeader";
 import Hero from "@/components/hero/Hero";
 import Features from "@/components/features/Features";
 import Benefits from "@/components/benefits/Benefits";
+import Testimonials from "@/components/testimonials/Testimonials";
 import { GradientBlob } from "@/components/common/Decorators";
 
 export default function Home() {
@@ -28,19 +29,7 @@ export default function Home() {
 
       <Benefits />
 
-      {/* Testimonials Section Placeholder */}
-      <Section id="testimonials" variant="surface">
-        <Container>
-          <SectionHeader
-            label="Customer Success"
-            title="Trusted by scaling businesses globally"
-            description="Read how teams use FlowCRM to optimize sales activities, accelerate collections, and boost alignment."
-          />
-          <div className="py-20 border border-dashed border-white/10 rounded-dashboard w-full flex items-center justify-center bg-card/50">
-            <span className="text-sm font-mono text-muted-foreground">[Testimonials Carousel Placeholder]</span>
-          </div>
-        </Container>
-      </Section>
+      <Testimonials />
 
       {/* CTA Section Placeholder */}
       <Section id="cta">
