@@ -1,26 +1,13 @@
 import { Section } from "@/components/common/Section";
 import { Container } from "@/components/common/Container";
 import { SectionHeader } from "@/components/common/SectionHeader";
-import { BackgroundGrid, GradientBlob } from "@/components/common/Decorators";
+import Hero from "@/components/hero/Hero";
+import { GradientBlob } from "@/components/common/Decorators";
 
 export default function Home() {
   return (
     <>
-      {/* Hero Section Placeholder */}
-      <Section id="hero" className="flex items-center min-h-[80vh]">
-        <BackgroundGrid />
-        <GradientBlob className="top-10 left-1/4" />
-        <Container className="flex flex-col items-center justify-center text-center">
-          <SectionHeader
-            label="Welcome to FlowCRM"
-            title="The Next Generation SaaS Workspace"
-            description="Manage your complete business pipeline, employee operations, and financial accounting from a unified, lightning-fast platform."
-          />
-          <div className="py-20 border border-dashed border-white/10 rounded-dashboard w-full max-w-4xl flex items-center justify-center bg-card/50">
-            <span className="text-sm font-mono text-muted-foreground">[Hero Section Mockup/Dashboard Placeholder]</span>
-          </div>
-        </Container>
-      </Section>
+      <Hero />
 
       {/* Features Section Placeholder */}
       <Section id="features" variant="surface">
