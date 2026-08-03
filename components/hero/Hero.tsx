@@ -5,10 +5,11 @@ import { gsap } from "@/lib/gsap";
 import { Container } from "@/components/common/Container";
 import { Section } from "@/components/common/Section";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { BackgroundGrid, GradientBlob } from "@/components/common/Decorators";
 import DashboardMockup from "./DashboardMockup";
 import FloatingWidgets from "./FloatingWidgets";
-import { Check } from "lucide-react";
+import { Check, ArrowRight, Calendar } from "lucide-react";
 
 export default function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -18,6 +19,14 @@ export default function Hero() {
     if (!containerRef.current) return;
 
     const ctx = gsap.context(() => {
+      // 0. Badge scale-pop entrance
+      gsap.from(".hero-badge", {
+        scale: 0.85,
+        opacity: 0,
+        duration: 0.5,
+        ease: "back.out(1.5)",
+      });
+
       // 1. Text reveal timeline (Headline lines)
       gsap.from(".hero-headline-line", {
         y: 80,
@@ -25,6 +34,7 @@ export default function Hero() {
         stagger: 0.15,
         duration: 1,
         ease: "power4.out",
+        delay: 0.1,
       });
 
       // 2. Paragraph description fade up
@@ -32,7 +42,7 @@ export default function Hero() {
         y: 30,
         opacity: 0,
         duration: 0.8,
-        delay: 0.4,
+        delay: 0.45,
         ease: "power3.out",
       });
 
@@ -42,7 +52,7 @@ export default function Hero() {
         opacity: 0,
         stagger: 0.1,
         duration: 0.6,
-        delay: 0.7,
+        delay: 0.75,
         ease: "back.out(1.7)",
       });
 
@@ -52,7 +62,7 @@ export default function Hero() {
         opacity: 0,
         stagger: 0.08,
         duration: 0.5,
-        delay: 0.9,
+        delay: 0.95,
         ease: "power2.out",
       });
 
@@ -61,7 +71,7 @@ export default function Hero() {
         x: 80,
         opacity: 0,
         duration: 1.2,
-        delay: 0.3,
+        delay: 0.35,
         ease: "power3.out",
       });
 
@@ -71,7 +81,7 @@ export default function Hero() {
         opacity: 0,
         stagger: 0.12,
         duration: 0.7,
-        delay: 1.1,
+        delay: 1.2,
         ease: "back.out(1.5)",
         onComplete: () => {
           // Initialize looping float animation after entrance completes
@@ -121,60 +131,80 @@ export default function Hero() {
           
           {/* Left Column: Copywriting Content */}
           <div className="lg:col-span-5 flex flex-col gap-6 text-left z-30">
+            
+            {/* Redesigned Floating Badge */}
+            <div className="hero-badge w-fit">
+              <Badge variant="outline" className="text-[10px] font-semibold text-primary border-primary/20 bg-primary/5 uppercase tracking-widest px-3.5 py-1 rounded-full">
+                Introducing FlowCRM 2.0
+              </Badge>
+            </div>
+
+            {/* Large Bold Heading */}
             <h1 className="text-hero tracking-tight overflow-hidden">
               <span className="block hero-headline-line">One Workspace.</span>
               <span className="block hero-headline-line text-primary">
-                Complete Operations.
+                Complete CRM & Ops.
               </span>
             </h1>
 
+            {/* Supporting Description */}
             <p className="hero-description text-body-premium max-w-xl opacity-100">
-              Everything your business needs to manage sales pipelines, HR operations, 
-              billing workflows, and customer relationships in a single, secure CRM platform.
+              FlowCRM converges lead pipelines, HR shift attendance, payroll billing, and 100+ native integrations. 
+              Scale your business operations without the application clutter.
             </p>
 
             {/* CTAs */}
             <div className="flex flex-wrap gap-4 mt-2">
-              <Button size="lg" className="hero-cta-button">
-                Book Demo
-              </Button>
-              <Button variant="outline" size="lg" className="hero-cta-button">
-                Watch Overview
-              </Button>
+              <div className="hero-cta-button shrink-0">
+                <Button size="lg" className="flex items-center gap-4 pr-2 bg-primary hover:bg-primary-hover text-white transition-all duration-300">
+                  <span>Get Started Free</span>
+                  <span className="size-8 rounded-full bg-white text-primary flex items-center justify-center transition-transform duration-300 group-hover/button:translate-x-0.5 shrink-0">
+                    <ArrowRight className="size-4" />
+                  </span>
+                </Button>
+              </div>
+              <div className="hero-cta-button shrink-0">
+                <Button variant="outline" size="lg" className="flex items-center gap-4 pr-2 border-white/10 hover:border-white/20 text-white transition-all duration-300">
+                  <span>Book a Demo</span>
+                  <span className="size-8 rounded-full bg-white/5 border border-white/10 text-muted-foreground flex items-center justify-center shrink-0">
+                    <Calendar className="size-4" />
+                  </span>
+                </Button>
+              </div>
             </div>
 
-            {/* Trust Badges */}
+            {/* Subtly Cased Trust Indicators */}
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-6 mt-4">
               <div className="hero-trust-item flex items-center gap-2 text-xs text-muted-foreground font-medium">
                 <div className="size-4 rounded-full bg-primary/10 flex items-center justify-center text-primary border border-primary/20 shrink-0">
                   <Check className="size-3" />
                 </div>
-                <span>Trusted by Growing Businesses</span>
+                <span>Trusted by growing businesses</span>
               </div>
               <div className="hero-trust-item flex items-center gap-2 text-xs text-muted-foreground font-medium">
                 <div className="size-4 rounded-full bg-primary/10 flex items-center justify-center text-primary border border-primary/20 shrink-0">
                   <Check className="size-3" />
                 </div>
-                <span>Secure Cloud Platform</span>
+                <span>Secure cloud platform</span>
               </div>
               <div className="hero-trust-item flex items-center gap-2 text-xs text-muted-foreground font-medium">
                 <div className="size-4 rounded-full bg-primary/10 flex items-center justify-center text-primary border border-primary/20 shrink-0">
                   <Check className="size-3" />
                 </div>
-                <span>Setup in Minutes</span>
+                <span>Setup in minutes</span>
               </div>
             </div>
           </div>
 
-          {/* Right Column: Dashboard Mockup & Floating Cards */}
+          {/* Right Column: Redesigned Dashboard Mockup & Floating Cards */}
           <div className="lg:col-span-7 relative hero-dashboard-wrapper z-10 w-full select-none">
             {/* Ambient Background Glow behind Dashboard */}
             <div className="absolute inset-0 bg-primary/5 rounded-dashboard filter blur-[40px] -z-10" />
             
-            {/* Dashboard Mockup Component */}
+            {/* Redesigned Dashboard Mockup Component */}
             <DashboardMockup />
 
-            {/* Floating Overlay Widgets */}
+            {/* Redesigned Floating Overlay Widgets */}
             <FloatingWidgets />
           </div>
 
