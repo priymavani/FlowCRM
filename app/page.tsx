@@ -5,6 +5,7 @@ import Hero from "@/components/hero/Hero";
 import Features from "@/components/features/Features";
 import Benefits from "@/components/benefits/Benefits";
 import Testimonials from "@/components/testimonials/Testimonials";
+import Integrations from "@/components/integrations/Integrations";
 import { GradientBlob } from "@/components/common/Decorators";
 
 export default function Home() {
@@ -13,19 +14,7 @@ export default function Home() {
       <Hero />
       <Features />
 
-      {/* Integrations Section Placeholder */}
-      <Section id="integrations" variant="surface-secondary">
-        <Container>
-          <SectionHeader
-            label="Universal Connectors"
-            title="Plug directly into your operational stack"
-            description="FlowCRM links with lead portals, communication channels, cloud spreadsheets, and webhooks."
-          />
-          <div className="py-20 border border-dashed border-white/10 rounded-dashboard w-full flex items-center justify-center bg-card/50">
-            <span className="text-sm font-mono text-muted-foreground">[Integrations Connector Grid Placeholder]</span>
-          </div>
-        </Container>
-      </Section>
+      <Integrations />
 
       <Benefits />
 

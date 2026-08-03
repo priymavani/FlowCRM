@@ -1,6 +1,7 @@
 import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
+import { ArrowRight } from "lucide-react";
 
 // DashboardCard Props
 interface DashboardCardProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -160,27 +161,53 @@ interface IntegrationCardProps extends React.HTMLAttributes<HTMLDivElement> {
   icon?: React.ReactNode;
   statusText?: string;
   connected?: boolean;
+  description?: string;
+  connectionType?: string;
 }
 
-export function IntegrationCard({ name, icon, statusText = "Ready to connect", connected = false, className, ...props }: IntegrationCardProps) {
+export function IntegrationCard({
+  name,
+  icon,
+  statusText = "Ready to connect",
+  connected = false,
+  description,
+  connectionType,
+  className,
+  ...props
+}: IntegrationCardProps) {
   return (
     <div
       className={cn(
-        "bg-card border border-white/5 rounded-card p-6 shadow-premium flex items-center justify-between hover:scale-[1.03] transition-transform duration-300 ease-out group",
+        "bg-card border border-white/5 rounded-card p-6 shadow-premium flex flex-col gap-4 hover:scale-[1.02] hover:border-primary/20 transition-all duration-300 ease-out group relative overflow-hidden",
         className
       )}
       {...props}
     >
-      <div className="flex items-center gap-4">
-        <div className="p-3 bg-surface rounded-button text-heading border border-white/5 group-hover:rotate-6 transition-transform duration-300">
-          {icon || <div className="size-6 bg-muted-foreground/20 rounded-full" />}
+      {/* Soft back glow on hover */}
+      <div className="absolute inset-0 bg-primary/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10" />
+
+      <div className="flex items-center justify-between w-full">
+        <div className="flex items-center gap-3.5">
+          {/* Premium Icon Container */}
+          <div className="p-3 bg-[#0A0D14] border border-white/5 rounded-xl shadow-[0_0_15px_rgba(255,255,255,0.02)] flex items-center justify-center group-hover:border-primary/20 group-hover:shadow-[0_0_20px_rgba(255,138,29,0.05)] transition-all duration-300 shrink-0">
+            {icon || <div className="size-6 bg-muted-foreground/20 rounded-full" />}
+          </div>
+          <div className="flex flex-col gap-0.5">
+            <h4 className="text-base font-bold text-heading group-hover:text-white transition-colors duration-200">{name}</h4>
+            <span className="text-[10px] text-muted-foreground uppercase tracking-wider font-mono">{connectionType || "Real-Time"}</span>
+          </div>
         </div>
-        <div className="flex flex-col">
-          <h4 className="text-base font-semibold text-heading">{name}</h4>
-          <span className="text-xs text-muted-foreground">{statusText}</span>
-        </div>
+        <Badge variant={connected ? "success" : "outline"} className="shrink-0 text-[9px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">
+          {statusText}
+        </Badge>
       </div>
-      <Badge variant={connected ? "success" : "outline"}>{connected ? "Connected" : "Connect"}</Badge>
+      {description && <p className="text-xs text-muted-foreground leading-relaxed">{description}</p>}
+      
+      {/* Hover Arrow and Strength indicator */}
+      <div className="flex items-center justify-between mt-1 pt-2 border-t border-white/[0.02] text-[10px] font-mono text-muted-foreground group-hover:text-primary transition-colors duration-200">
+        <span>STRENGTH: 100%</span>
+        <ArrowRight className="size-3.5 translate-x-2 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-300" />
+      </div>
     </div>
   );
 }
