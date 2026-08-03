@@ -65,19 +65,30 @@ interface FeatureCardProps extends React.HTMLAttributes<HTMLDivElement> {
   description: string;
   icon?: React.ReactNode;
   preview?: React.ReactNode;
+  features?: string[];
+  children?: React.ReactNode;
 }
 
-export function FeatureCard({ title, description, icon, preview, className, ...props }: FeatureCardProps) {
+export function FeatureCard({
+  title,
+  description,
+  icon,
+  preview,
+  features,
+  children,
+  className,
+  ...props
+}: FeatureCardProps) {
   return (
     <div
       className={cn(
-        "bg-card border border-white/5 rounded-card p-7 shadow-premium flex flex-col gap-6 hover:scale-[1.03] transition-transform duration-300 ease-out group",
+        "bg-card border border-white/5 rounded-card p-7 shadow-premium flex flex-col gap-6 hover:scale-[1.02] transition-transform duration-300 ease-out group",
         className
       )}
       {...props}
     >
       {icon && (
-        <div className="p-3 bg-surface rounded-button w-fit text-primary border border-white/5 group-hover:rotate-6 transition-transform duration-300">
+        <div className="p-3 bg-surface rounded-button w-fit text-primary border border-white/5 group-hover:rotate-6 transition-transform duration-300 animate-hover-icon">
           {icon}
         </div>
       )}
@@ -85,6 +96,19 @@ export function FeatureCard({ title, description, icon, preview, className, ...p
         <h3 className="text-card-title text-xl font-semibold">{title}</h3>
         <p className="text-body-premium text-sm/relaxed">{description}</p>
       </div>
+
+      {features && (
+        <ul className="flex flex-col gap-2.5 mt-1">
+          {features.map((feature, idx) => (
+            <li key={idx} className="flex items-center gap-2.5 text-xs text-muted-foreground font-medium">
+              <span className="text-primary font-bold">✓</span>
+              <span>{feature}</span>
+            </li>
+          ))}
+        </ul>
+      )}
+
+      {children}
       {preview && <div className="mt-auto w-full bg-surface border border-white/5 rounded-dashboard p-4 overflow-hidden">{preview}</div>}
     </div>
   );

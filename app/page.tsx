@@ -2,6 +2,7 @@ import { Section } from "@/components/common/Section";
 import { Container } from "@/components/common/Container";
 import { SectionHeader } from "@/components/common/SectionHeader";
 import Hero from "@/components/hero/Hero";
+import Features from "@/components/features/Features";
 import { GradientBlob } from "@/components/common/Decorators";
 
 export default function Home() {
@@ -9,33 +10,7 @@ export default function Home() {
     <>
       <Hero />
 
-      {/* Features Section Placeholder */}
-      <Section id="features" variant="surface">
-        <Container>
-          <SectionHeader
-            label="Powerful Core Features"
-            title="All the modules your company needs to grow"
-            description="Explore our specialized modules for pipeline planning, human resource tracking, and smart billing."
-          />
-          <div className="py-20 border border-dashed border-white/10 rounded-dashboard w-full flex items-center justify-center bg-card/50">
-            <span className="text-sm font-mono text-muted-foreground">[Features Section Cards Grid Placeholder]</span>
-          </div>
-        </Container>
-      </Section>
-
-      {/* Dashboard Showcase Section Placeholder */}
-      <Section id="dashboard">
-        <Container>
-          <SectionHeader
-            label="Visual Command Center"
-            title="Get a 360° view of your business metrics"
-            description="Monitor live lead conversions, revenue metrics, team schedules, and task boards."
-          />
-          <div className="py-20 border border-dashed border-white/10 rounded-dashboard w-full flex items-center justify-center bg-card/50">
-            <span className="text-sm font-mono text-muted-foreground">[Large CRM Dashboard Mockup Showcase Placeholder]</span>
-          </div>
-        </Container>
-      </Section>
+      <Features />
 
       {/* Integrations Section Placeholder */}
       <Section id="integrations" variant="surface-secondary">
